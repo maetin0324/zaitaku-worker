@@ -22,6 +22,9 @@ async fn main(req: Request, env: Env, _ctx: Context) -> Result<Response> {
         }
         Response::error("Status not updated", 400)
     })
+    .get_async("/robots.txt", |_, _| async {
+        Response::ok("User-agent: *\nDisallow: /")
+    })
     .run(req, env)
     .await
 }
